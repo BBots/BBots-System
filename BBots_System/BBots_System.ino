@@ -1,6 +1,6 @@
-#include <SoftwareServo.h>
+#include "SoftwareServo.h"
 
-int angle=90;
+int angle = 90;
 SoftwareServo myservo;
 SoftwareServo mymotor;
 void setup()
@@ -20,13 +20,15 @@ void setup()
 
 void loop() {
 
-  LedControl(0 , 1 , 0); 
-  
+  LedControl(0 , 1 , 0);
+
 
   angle++;
-  
-  if (angle>179){angle=1;}
-  
+
+  if (angle > 179) {
+    angle = 1;
+  }
+
   custom_delay(2500);
   Serial.println("Running Main loop [End]...");
   LedControl(0 , 0 , 0);
@@ -51,36 +53,36 @@ void Test(void)
   LedControl(0 , 0 , 0);
   delay (2500);
   Serial.println("RGB Test Finish");
-  
+
   Serial.println("Buzzer Test:");
-  tone(8, 2500, 250); 
+  tone(8, 2500, 250);
   tone(8, 3000, 250);
   Serial.println("Buzzer Test Finish");
   delay (2500);
 
   Serial.println("Servo Test:");
 
-  for (int f=30; f<150; f++)
+  for (int f = 30; f < 150; f++)
   {
     myservo.write(f);
     mymotor.write(f);
     SoftwareServo::refresh();
     custom_delay(100);
-  }  
+  }
   Serial.println("Servo Test Finish");
-  delay (2500);  
+  delay (2500);
 
   Serial.println("Test Finish:");
 }
 
 void custom_delay(int miliseconds)        // Custom delay that allow servo refresh
 {
- for (int i=0; i <= miliseconds; i++)
- {
-  SoftwareServo::refresh();
-  delay(1);
-  } 
- }
+  for (int i = 0; i <= miliseconds; i++)
+  {
+    SoftwareServo::refresh();
+    delay(1);
+  }
+}
 
 
 void LedControl(unsigned char red, unsigned char green, unsigned char blue)
